@@ -107,7 +107,7 @@ function OrderForm(props) {
                     />
                 </label>
 
-                <button disabled = {disabled}>Submit</button>
+                <button id = 'done' disabled = {disabled}>Submit</button>
 
             </form>
             <div>
