@@ -4,7 +4,7 @@ import Confirmation from './Confirmation';
 
 function OrderForm(props) {
 
-    const {values, update, submit, orders} = props;
+    const {values, update, submit, orders, disabled, errors} = props;
 
     const history = useHistory();
 
@@ -25,6 +25,13 @@ function OrderForm(props) {
 
     return (
         <div>
+            <h3> Please Fill Out Your Order Below.</h3>
+
+            <div className = 'errors-container'>
+                <p>{errors.name}</p>
+                <p>{errors.email}</p>
+                <p>{errors.size}</p>
+            </div>
             <form onSubmit = {onSubmit}>
                 <label> Name
                     <input name = 'name'
@@ -100,7 +107,7 @@ function OrderForm(props) {
                     />
                 </label>
 
-                <button>Submit</button>
+                <button disabled = {disabled}>Submit</button>
 
             </form>
             <div>
