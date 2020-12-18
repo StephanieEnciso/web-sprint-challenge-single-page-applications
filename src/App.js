@@ -51,7 +51,7 @@ const App = () => {
         </Route>
       <div>
         <Route path = '/pizza' >
-          <OrderForm values = {formValues} update = {updateOrderForm} submit = {submitOrderForm}/>
+          <OrderForm values = {formValues} update = {updateOrderForm} submit = {submitOrderForm} orders = {orders}/>
         </Route>
       </div>
       

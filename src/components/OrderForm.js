@@ -1,8 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import Confirmation from './Confirmation';
 
 function OrderForm(props) {
 
-    const {values, update, submit} = props
+    const {values, update, submit, orders} = props;
+
+    const history = useHistory();
 
     const change = (event) => {
         const {name, value, type, checked} = event.target;
@@ -13,6 +17,10 @@ function OrderForm(props) {
     const onSubmit = (event) => {
         event.preventDefault();
         submit();
+    }
+
+    const routeToHome = () => {
+        history.push('/');
     }
 
     return (
@@ -95,6 +103,15 @@ function OrderForm(props) {
                 <button>Submit</button>
 
             </form>
+            <div>
+                <button onClick = {routeToHome}>Go Home</button>
+            </div>
+
+            <div>
+                {orders.map((order) => {
+                    return <Confirmation key = {order.name} orderInfo = {order} />
+                })}  
+            </div>
         </div>
     )
 }
