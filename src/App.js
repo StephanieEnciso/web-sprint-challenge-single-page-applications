@@ -4,6 +4,7 @@ import Home from './components/Home';
 import OrderForm from './components/OrderForm';
 import * as yup from 'yup';
 import schema from './validation/formSchema';
+import axios from "axios";
 
 const blankForm = {
   name: '',
@@ -32,6 +33,22 @@ const App = () => {
   const [disabledBtn, setDisabledBtn] = useState(isDisabled);
   const [formErrors, setFormErrors] = useState(initialErrors);
 
+  const postNewOrder = (newOrder) => {
+    axios
+     .post('https://reqres.in/api/users', newOrder)
+     .then((response) => {
+       console.log(response.data);
+       setOrders([response.data, ...orders]);
+       setFormValues(blankForm);
+     })
+     .catch((error) => {
+       console.log(error);
+       debugger;
+     });
+
+
+  };
+
   const updateOrderForm = (name, value) => {
 
     yup.reach(schema, name)
@@ -57,8 +74,7 @@ const App = () => {
       specInstruc: formValues.specInstruc,
     };
 
-    setOrders([newOrder, ...orders]);
-    setFormValues(blankForm);
+    postNewOrder(newOrder)
   }
 
   useEffect(() => {
